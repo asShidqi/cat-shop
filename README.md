@@ -1,3 +1,6 @@
+### link web
+http://muhammad-fayyed-catshop.pbp.cs.ui.ac.id
+
 ### 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
 - membuat repository di lokal directory dengan nama cat-shop. Mensetup env dan mengactivate. Menginstall requirement. Dan menjalankan startproject untuk membuat project.
