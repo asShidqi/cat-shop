@@ -1,5 +1,5 @@
 ### link web
-http://pbp.cs.ui.ac.id/muhammad.fayyed/catshop
+http://muhammad-fayyed-catshop.pbp.cs.ui.ac.id
 
 ### 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
