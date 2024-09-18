@@ -1,6 +1,37 @@
+{%extends 'base.html' %}
+{% block content %}
 <h1>{{ name_app }}</h1>
 
 <h5>Name: </h5>
 <p>{{ name }}</p> 
 <h5>Class: </h5>
 <p>{{ class }}</p>
+
+{% if not cat_entries %}
+<p>Belum ada data mood pada mental health tracker.</p>
+{% else %}
+<table>
+  <tr>
+    <th>Cat Name</th>
+    <th>Price</th>
+    <th>Description</th>
+  </tr>
+
+  {% comment %} Berikut data cat di bawah baris ini 
+  {% endcomment %} 
+  {% for cat_entry in cat_entries %}
+  <tr>
+    <td>{{cat_entry.name}}</td>
+    <td>{{cat_entry.price}}</td>
+    <td>{{cat_entry.description}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<br />
+
+<a href="{% url 'main:create_cat_entry' %}">
+  <button>Add New Cat Entry</button>
+</a>
+{% endblock content %}
