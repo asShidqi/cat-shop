@@ -1,6 +1,37 @@
 ### link web
 http://muhammad-fayyed-catshop.pbp.cs.ui.ac.id
 
+# tugas 4
+### 1. Apa perbedaan antara HttpResponseRedirect() dan redirect()
+
+HttpResponseRedirect argumen pertama hanya dapat berupa url sedangkan redirect dapat menerima model,view, atau urls sebagai argumen sehingga lebih fleksibel dan dinamis dalam penggunaannya
+
+### 2. Jelaskan cara kerja penghubungan model Product dengan User!
+
+Pertama, kita menghubungkan model dengan user melalui relasi, seperti menggunakan ForeignKey untuk menghubungkan CatEntry dengan User. Setelah itu, dalam views, kita menambahkan kondisi agar objek dari form tidak langsung disimpan ke database sehingga kita bisa menandai objek tersebut sebagai milik user yang sedang login. Di fungsi view, misalnya pada show_main, kita bisa memfilter entri berdasarkan user yang login menggunakan CatEntry.objects.filter(user=request.user), agar hanya entri milik pengguna tersebut yang ditampilkan. Nama pengguna juga bisa ditampilkan di template dengan mengakses request.user.username melalui context. Setelah semua perubahan ini, kita perlu menjalankan perintah makemigrations dan migrate untuk memperbarui database.
+
+### 3.Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+
+- Authentication adalah proses verifikasi apakah username dan password yang kita masukan saat login sesuai dengan dalam database
+- Authorization adalah memberikan hak akses mengenai apa saja yang dapat diakses oleh pengguna yang login.
+- Ketika pengguna login, Django memverifikasi kredensial melalui authentication. Jika valid, Django membuat sesi untuk pengguna dan menyimpan informasi sesi tersebut di cookies pengguna, memungkinkan Django untuk mengenali pengguna pada setiap request berikutnya.
+- Penggunaan Authentication Django memiliki modul bawaan django.contrib.auth yang menangani login, logout, dan validasi pengguna.
+- Penggunaan Authorization Django menggunakan sistem permissions dan groups yang bisa diatur melalui model User. Django juga menyediakan decorators seperti @login_required untuk membatasi akses ke view tertentu.
+
+### 4. Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+
+Django mengingat pengguna yang telah login dengan menggunakan sesi yang disimpan di cookies. Setelah login berhasil, Django membuat entri sesi di database dan mengirimkan session ID ke browser pengguna, yang kemudian dikirim kembali pada setiap permintaan untuk mengenali pengguna tersebut. Selain untuk mengelola sesi, cookies juga digunakan untuk menyimpan preferensi pengguna, melacak aktivitas, atau menyimpan data sementara seperti item keranjang belanja. Namun, tidak semua cookies aman, karena ada risiko seperti session hijacking atau cross-site scripting.
+
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)
+
+- Aktifkan Virtual Environment: Pastikan virtual environment Django sudah aktif sebelum melanjutkan ke langkah berikutnya.
+- Fungsi Registrasi: Tambahkan fungsi register di views.py yang menggunakan UserCreationForm untuk menangani pendaftaran pengguna baru. Jika pendaftaran berhasil, pengguna akan diarahkan ke halaman login dengan pesan sukses.
+- Fungsi Login dan Logout: Buat fungsi login_user dan logout_user di views.py. Fungsi login_user menggunakan AuthenticationForm untuk memverifikasi kredensial pengguna dan mengelola sesi pengguna, sedangkan logout_user akan mengakhiri sesi pengguna dan mengarahkan kembali ke halaman login.
+- Buat Halaman Template: Buat berkas HTML untuk tampilan register.html dan login.html di direktori main/templates, sehingga pengguna dapat berinteraksi dengan fungsi registrasi dan login.
+- Hubungkan Model CatEntry dengan User: Di models.py, tambahkan kolom user sebagai ForeignKey dalam kelas CatEntry, sehingga setiap entri cat dapat diasosiasikan dengan satu pengguna. Dalam fungsi create_cat_entry, pastikan entri cat yang dibuat dihubungkan dengan pengguna yang sedang login.
+- Menampilkan Informasi Pengguna: Di fungsi show_main, tambahkan informasi pengguna yang sedang login, termasuk username dan cookie last_login untuk menunjukkan waktu terakhir pengguna login.
+- Migrasi Model: Setelah melakukan semua perubahan, jalankan perintah makemigrations dan migrate untuk menerapkan perubahan pada database. Pastikan untuk menjalankan proyek untuk memverifikasi bahwa semua fitur berfungsi dengan baik.
+
 # tugas 3
 ### 1. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
 

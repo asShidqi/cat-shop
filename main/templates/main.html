@@ -3,9 +3,12 @@
 <h1>{{ name_app }}</h1>
 
 <h5>Name: </h5>
-<p>{{ name }}</p> 
+<h5>{{ name }}</h5> 
 <h5>Class: </h5>
-<p>{{ class }}</p>
+<h5>{{ class }}</h5>
+<br>
+<h5>User Login: </h5>
+<h5>{{ user_login }} </h5>
 
 {% if not cat_entries %}
 <p>Belum ada data mood pada mental health tracker.</p>
@@ -34,4 +37,8 @@
 <a href="{% url 'main:create_cat_entry' %}">
   <button>Add New Cat Entry</button>
 </a>
+<a href="{% url 'main:logout' %}">
+  <button>Logout</button>
+</a>
+<h5>Sesi terakhir login: {{ last_login }}</h5>
 {% endblock content %}
