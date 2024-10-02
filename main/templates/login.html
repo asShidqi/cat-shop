@@ -1,32 +1,73 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block meta %}
 <title>Login</title>
 {% endblock meta %}
 
 {% block content %}
-<div class="login">
-  <h1>Login</h1>
+<div class="h-screen flex items-center justify-center bg-teal-200">
+  <div class="bg-white shadow-lg rounded-lg flex flex-col md:flex-row overflow-hidden w-full max-w-lg md:max-w-2xl h-auto md:h-500">
+    
+    <!-- Left Side (Image) - hidden on small screens -->
+    <div class="w-full md:w-1/2 bg-teal-800 flex items-center justify-center hidden md:flex">
+      <img alt="Illustration of a man opening a door" class="h-64" src="{% static "img/cat_login.png" %}" width="300"/>
+    </div>
 
-  <form method="POST" action="">
-    {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-      <tr>
-        <td></td>
-        <td><input class="btn login_btn" type="submit" value="Login" /></td>
-      </tr>
-    </table>
-  </form>
+    <!-- Right Side (Form) -->
+    <div class="w-full md:w-1/2 bg-yellow-500 flex flex-col items-center justify-center p-8">
+      <div class="bg-white p-6 rounded-lg shadow-md w-full">
+        <h2 class="text-yellow-600 text-lg font-bold mb-4">
+          Login to your account
+        </h2>
 
-  {% if messages %}
-  <ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %} Don't have an account yet?
-  <a href="{% url 'main:register' %}">Register Now</a>
+        <!-- Login Form -->
+        <form method="POST" class="space-y-6">
+          {% csrf_token %}
+          <input type="hidden" name="remember" value="true">
+          <div class="space-y-4">
+            <!-- Username Field -->
+            <div>
+              <label for="username" class="block mb-2 font-semibold text-black">
+                Username
+              </label>
+              <input id="username" name="username" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm" placeholder="Username">
+            </div>
+
+            <!-- Password Field -->
+            <div>
+              <label for="password" class="block mb-2 font-semibold text-black">
+                Password
+              </label>
+              <input id="password" name="password" type="password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm" placeholder="Password">
+            </div>
+          </div>
+
+          <!-- Sign In Button -->
+          <div>
+            <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-teal-800 hover:bg-teal-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+              Sign in
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Display messages -->
+      {% if messages %}
+      <div class="mt-4 w-full">
+        {% for message in messages %}
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <span class="block sm:inline">{{ message }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- Register link -->
+      <div class="mt-4 text-sm text-center">
+        <p class="text-white">Don't have an account yet?</p>
+        <a href="{% url 'main:register' %}" class="text-white font-bold">Register Now</a>
+      </div>
+    </div>
+  </div>
 </div>
-
 {% endblock content %}

@@ -95,3 +95,26 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def edit_cat(request, id):
+    # Get mood entry berdasarkan id
+    cat = CatEntry.objects.get(pk = id)
+
+    # Set mood entry sebagai instance dari form
+    form = CatEntryForm(request.POST or None, instance=cat)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_cat.html", context)
+
+def delete_cat(request, id):
+    # Get mood berdasarkan id
+    cat = CatEntry.objects.get(pk = id)
+    # Hapus mood
+    cat.delete()
+    # Kembali ke halaman awal
+    return HttpResponseRedirect(reverse('main:show_main'))

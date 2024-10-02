@@ -1,6 +1,38 @@
 ### link web
 http://muhammad-fayyed-catshop.pbp.cs.ui.ac.id
 
+# tugas 5
+### 1. Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+
+urutan dari yang paling prioritas
+1. Inline style
+2. External dan internal style sheets
+3. Browser default
+jika beberapa selector memiliki spesifikasi yang sama, urutan deklarasi di CSS akan diambil, dengan aturan terakhir yang akan diterapkan.
+
+### 2. Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+
+karena memastikan tampilan dan fungsionalitas aplikasi web dapat menyesuaikan berbagai ukuran layar, dari ponsel hingga desktop. Hal ini meningkatkan user experience karena mereka dapat mengakses aplikasi dengan nyaman tanpa perlu zoom atau scroll berlebihan.
+
+### 3. Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+
+- Margin adalah ruang di luar border elemen. Mengatur jarak antar elemen yang berdekatan.
+- Border adalah garis yang mengelilingi konten dan padding elemen. Border bisa memiliki ketebalan, warna, dan gaya yang berbeda.
+- Padding adalah ruang antara konten elemen dan border. Menambah ruang di dalam elemen tanpa mempengaruhi elemen lain.
+
+### 4. Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+
+- Flexbox adalah sistem layout yang digunakan untuk mengatur elemen dalam satu dimensi sebaris atau sebaris kolom. Berguna untuk membuat layout yang dinamis dan mudah diatur tanpa memerlukan banyak pengaturan float atau positioning.
+- Grid layout adalah sistem layout dua dimensi (baris dan kolom) yang memungkinkan pengaturan elemen lebih kompleks dan rapi. Grid mempermudah pengaturan layout halaman dengan presisi. Berguna untuk membuat layout yang terstruktur dengan jelas seperti galeri foto atau layout halaman utama.
+
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+- menambahkan fitur untuk hapus cat pada aplikasi dengan menambahkan fungsi baru pada views.py dan menghubungkan padda urls.py. Kemudian tambahkan buttonnya agar interaktif. Lakukan hal yang sama dengan fitur mengedit product. 
+- hubungkan project kita dengan tailwind dengan menambah script CDN pada head.html
+- buat file global.css di /static/css untuk membuat custom css yang sudah didefinisikan sendiri kemudian tambahkan pada head.html juga seperti tailwind tadi.
+- buat styling pada halaman login,register,dan tambah product menggunakan tailwind pada file htmlnya. Kemudian tambahkan navbar yang responsive menggunakan tailwind dengan menambahkan file navbar.html pada templates/ di root directory.
+
+
 # tugas 4
 ### 1. Apa perbedaan antara HttpResponseRedirect() dan redirect()
 

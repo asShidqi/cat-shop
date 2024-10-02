@@ -1,44 +1,37 @@
-{%extends 'base.html' %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Cat Store</title>
+{% endblock meta %}
+
 {% block content %}
-<h1>{{ name_app }}</h1>
+{% include 'navbar.html' %}
+<div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-green-100 flex flex-col">
+  
+  <div class="px-3 mb-4">
+    <div class="flex rounded-md items-center bg-yellow-600 py-2 px-4 w-fit">
+      <h1 class="text-white text-center">Last Login: {{ last_login }}</h1>
+    </div>
+  </div>
 
-<h5>Name: </h5>
-<h5>{{ name }}</h5> 
-<h5>Class: </h5>
-<h5>{{ class }}</h5>
-<br>
-<h5>User Login: </h5>
-<h5>{{ user_login }} </h5>
-
-{% if not cat_entries %}
-<p>Belum ada data kucing pada catshop.</p>
-{% else %}
-<table>
-  <tr>
-    <th>Cat Name</th>
-    <th>Price</th>
-    <th>Description</th>
-  </tr>
-
-  {% comment %} Berikut data cat di bawah baris ini 
-  {% endcomment %} 
-  {% for cat_entry in cat_entries %}
-  <tr>
-    <td>{{cat_entry.name}}</td>
-    <td>{{cat_entry.price}}</td>
-    <td>{{cat_entry.description}}</td>
-  </tr>
-  {% endfor %}
-</table>
-{% endif %}
-
-<br />
-
-<a href="{% url 'main:create_cat_entry' %}">
-  <button>Add New Cat Entry</button>
-</a>
-<a href="{% url 'main:logout' %}">
-  <button>Logout</button>
-</a>
-<h5>Sesi terakhir login: {{ last_login }}</h5>
+  <div class="flex justify-end mb-6">
+    <a href="{% url 'main:create_cat_entry' %}" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+      Add New Cat Entry
+    </a>
+  </div>
+  
+  {% if not cat_entries %}
+    <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+      <img src="{% static 'img/sedih-banget.png' %}" alt="Sad cat" class="w-32 h-32 mb-4"/>
+      <p class="text-center text-gray-600 mt-4">Belum ada data cat pada cat store.</p>
+    </div>
+  {% else %}
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full">
+      {% for cat_entry in cat_entries %}
+        {% include 'card_cat.html' with cat_entry=cat_entry %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
 {% endblock content %}
