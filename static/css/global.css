@@ -1,13 +1,13 @@
 .form-style form input, form textarea, form select {
     width: 100%;
     padding: 0.5rem;
-    border: 2px solid #bcbcbc;
+    border: 2px solid #a7974e;
     border-radius: 0.375rem;
 }
 .form-style form input:focus, form textarea:focus, form select:focus {
     outline: none;
-    border-color: #674ea7;
-    box-shadow: 0 0 0 3px #674ea7;
+    border-color: #a7974e;
+    box-shadow: 0 0 0 3px #726035;
 }
 @keyframes shine {
     0% { background-position: -200% 0; }
@@ -17,4 +17,15 @@
     background: linear-gradient(120deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3));
     background-size: 200% 100%;
     animation: shine 3s infinite;
+}
+
+@media (min-width: 768px) {
+    .bg-yellow-200 {
+        display: flex;
+        flex-direction: column; /* Ensure all elements stack vertically */
+    }
+
+    .bg-yellow-200 .flex {
+        justify-content: space-between; /* Align buttons evenly */
+    }
 }

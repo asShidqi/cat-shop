@@ -1,6 +1,6 @@
 from django.urls import path
 from main.views import show_main,create_cat_entry,show_xml,show_json,show_json_by_id,show_xml_by_id
-from main.views import register,login_user,logout_user,edit_cat,delete_cat
+from main.views import register,login_user,logout_user,edit_cat,delete_cat, add_cat_entry_ajax
 
 app_name = 'main'
 
@@ -16,4 +16,5 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('edit-cat/<uuid:id>', edit_cat, name='edit_cat'),
     path('delete/<uuid:id>', delete_cat, name='delete_cat'),
+    path('create-cat-entry-ajax', add_cat_entry_ajax, name='add_cat_entry_ajax'),
 ]

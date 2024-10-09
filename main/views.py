@@ -10,18 +10,19 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.utils.html import strip_tags
 
 # Create your views here.
 @login_required(login_url='/login')
 def show_main(request):
-    cat_entries = CatEntry.objects.filter(user=request.user)
     
     context = {
         'name_app' : 'Cat Shop',
         'name': 'Muhammad Fayyed As Shidqi',
         'class': 'PBP D',
         'user_login': request.user.username,
-        'cat_entries': cat_entries,
         'last_login': request.COOKIES['last_login'],
     }
 
@@ -39,18 +40,13 @@ def create_cat_entry(request):
     context = {'form': form}
     return render(request, "create_cat_entry.html", context)
 
-def show_xml(request):
-    data = CatEntry.objects.all()
 
 def show_xml(request):
-    data = CatEntry.objects.all()
+    data = CatEntry.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json(request):
-    data = CatEntry.objects.all()
-
-def show_json(request):
-    data = CatEntry.objects.all()
+    data = CatEntry.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml_by_id(request, id):
@@ -84,6 +80,8 @@ def login_user(request):
         response = HttpResponseRedirect(reverse("main:show_main"))
         response.set_cookie('last_login', str(datetime.datetime.now()))
         return response
+      else:
+        messages.error(request, "Invalid username or password. Please try again.")
 
    else:
       form = AuthenticationForm(request)
@@ -118,3 +116,19 @@ def delete_cat(request, id):
     cat.delete()
     # Kembali ke halaman awal
     return HttpResponseRedirect(reverse('main:show_main'))
+
+@csrf_exempt
+@require_POST
+def add_cat_entry_ajax(request):
+    name = strip_tags(request.POST.get("name"))
+    price = request.POST.get("price")
+    description = strip_tags(request.POST.get("description"))
+    link = request.POST.get("link")
+    user = request.user
+
+    new_cat = CatEntry(
+        name=name, price=price, description=description, link=link, user=user
+    )
+    new_cat.save()
+
+    return HttpResponse(b"CREATED", status=201)

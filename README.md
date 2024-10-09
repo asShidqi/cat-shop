@@ -1,6 +1,31 @@
 ### link web
 http://muhammad-fayyed-catshop.pbp.cs.ui.ac.id
 
+# Tugas 6
+### 1. Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+JavaScript memungkinkan halaman web menjadi interaktif. Kita bisa buat elemen seperti tombol yang responsif tanpa perlu reload halaman. Contohnya, dengan JavaScript kita bisa validasi form, menambah item ke keranjang belanjaan, atau mengubah tampilan UI secara langsung. Intinya, JavaScript bikin pengalaman pengguna lebih dinamis dan real-time.
+
+### 2. Jelaskan fungsi dari penggunaan `await` ketika kita menggunakan `fetch()`! Apa yang akan terjadi jika kita tidak menggunakan `await`?
+`await` digunakan supaya JavaScript menunggu respons dari `fetch()` sebelum lanjut ke kode berikutnya. Kalau tidak pakai `await`, kode akan tetap berjalan meskipun respons belum diterima, yang bisa bikin hasilnya jadi salah karena belum ada data yang di-fetch.
+
+### 3. Mengapa kita perlu menggunakan dekorator `csrf_exempt` pada view yang akan digunakan untuk AJAX POST?
+Dekorator `csrf_exempt` digunakan supaya request AJAX yang dikirim dari form atau halaman kita tidak ditolak oleh Django. Django secara default punya CSRF protection untuk mencegah serangan, tapi pada beberapa kasus AJAX POST, kita perlu matikan protection ini supaya request-nya bisa diterima.
+
+### 4. Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+Pembersihan data di backend lebih aman karena frontend bisa dimanipulasi oleh pengguna. Kalau hanya bersih-bersih data di frontend, pengguna masih bisa bypass validasi atau pembersihan itu dan mengirimkan data yang salah atau berbahaya ke server. Backend jadi lapisan perlindungan terakhir yang mencegah hal-hal berbahaya.
+
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
+- Mengubah kode untuk menampilkan cards data cat agar mendukung AJAX GET. Melakukan fetch data cat milik user yang sedang login menggunakan AJAX GET, supaya bisa tampil langsung di halaman tanpa reload.
+
+- Menambahkan tombol Add New Cat Entry by AJAX yang ketika diklik akan membuka modal form buat tambah cat baru. Form ini nantinya pakai AJAX POST buat kirim data.
+
+- Membuat view baru untuk proses tambah cat ke database. Modal akan otomatis tertutup setelah data berhasil disimpan, form juga akan di-clear dari data input sebelumnya.
+
+- Menambahkan path baru `/create-ajax/` yang mengarah ke view buat tambah cat. Form modal tadi dihubungkan ke path ini untuk proses penambahan cat.
+
+- Setelah cat berhasil ditambah, halaman utama akan di-refresh secara asinkronus untuk update list cat tanpa reload keseluruhan halaman.
+
+
 # tugas 5
 ### 1. Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
 
